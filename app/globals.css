@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   KmZero — Theme tokens
+   Palette:
+   - Milk White: #FDFBF0
+   - Deep Sage:  #465940
+   - Sage scale: #E7F5DC #CFE1B9 #B6C99B #98A77C #88976C #728156
+   ========================================================= */
+
+/* Default theme: DARK */
+:root{
+  --bg: #0F1410; /* flat, no stripes */
+  --ink: rgba(253, 251, 240, .94);
+  --muted: rgba(253, 251, 240, .72);
+  --line: rgba(253, 251, 240, .14);
+
+  --surface: rgba(70, 89, 64, .22);
+  --surface2: rgba(70, 89, 64, .38);
+
+  --brand: #728156;
+  --brand2:#465940;
+  --accent:#88976C;
+  --accent2:#98A77C;
+
+  --shadow: 0 26px 70px rgba(0,0,0,.42);
+  --shadow2: 0 18px 50px rgba(0,0,0,.35);
+}
+
+/* Light theme (higher contrast) */
+html.light{
+  --bg: #FDFBF0;
+  --ink: #0F1A10;
+  --muted: rgba(15, 26, 16, .70);
+  --line: rgba(15, 26, 16, .18);
+
+  --surface: rgba(253, 251, 240, .90);
+  --surface2: rgba(253, 251, 240, .98);
+
+  --brand: #2C3A29;  /* darker for CTA contrast */
+  --brand2:#465940;
+  --accent:#465940;
+  --accent2:#728156;
+
+  --shadow: 0 22px 60px rgba(0,0,0,.12);
+  --shadow2: 0 14px 40px rgba(0,0,0,.10);
+}
+
+html, body { height: 100%; }
+
+body{
+  background: var(--bg);
+  color: var(--ink);
+}
