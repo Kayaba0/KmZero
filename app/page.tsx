@@ -1,4 +1,4 @@
-import ThemeToggle from "@/components/ThemeToggle";
+import SiteHeader from "@/components/SiteHeader";
 import type { ReactNode } from "react";
 
 function PrimaryButton({ href, children }: { href: string; children: ReactNode }) {
@@ -61,60 +61,23 @@ function ServiceCard({ title, desc }: { title: string; desc: string }) {
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Top nav */}
-      <header
-        className="sticky top-0 z-50 border-b backdrop-blur"
-        style={{ borderColor: "var(--line)", background: "var(--surface)" }}
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-              alt="KmZero"
-              className="h-9 w-9"
-              style={{ filter: "drop-shadow(0 10px 20px rgba(0,0,0,.25))" }}
-            />
-            <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">KmZero</div>
-              <div className="text-xs" style={{ color: "var(--muted)" }}>
-                Produttori locali • Prenotazioni
-              </div>
-            </div>
-          </div>
+      <SiteHeader />
 
-          <nav className="hidden items-center gap-6 text-sm md:flex" style={{ color: "var(--muted)" }}>
-            <a href="#services" className="hover:opacity-80">Servizi</a>
-            <a href="#about" className="hover:opacity-80">Chi siamo</a>
-            <a href="#numbers" className="hover:opacity-80">Numeri</a>
-            <a href="#producers" className="hover:opacity-80">Produttori</a>
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <a
-              href="#contact"
-              className="hidden rounded-full border px-4 py-2 text-sm font-semibold md:inline-flex"
-              style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
-            >
-              Contatti
-            </a>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
-      {/* HERO — centered, NO pills/boxes */}
-      <section className="relative">
+{/* HERO — centered, NO pills/boxes */}
+      <section className="relative pb-24">
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "radial-gradient(1100px 520px at 50% 35%, rgba(114,129,86,.32), transparent 60%)," +
-              "radial-gradient(900px 520px at 20% 10%, rgba(70,89,64,.30), transparent 62%)," +
-              "linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35) 35%, rgba(0,0,0,.05) 75%, transparent)",
+            background: "#465940", 
+			/*background: `
+  radial-gradient(1100px 520px at 50% 35%, rgba(114,129,86,.32), transparent 60%),
+  radial-gradient(900px 520px at 20% 10%, rgba(70,89,64,.30), transparent 62%),
+  linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35) 35%, rgba(0,0,0,.05) 75%, transparent),
+  #465940`,*/
           }}
           aria-hidden
         />
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-16 text-center md:py-24">
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-16 text-center md:py-20">
           <h1
             className="max-w-4xl text-4xl font-semibold tracking-tight md:text-6xl"
             style={{ color: "var(--ink)" }}
@@ -131,13 +94,24 @@ export default function Home() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-            <PrimaryButton href="#producers">Scopri i produttori</PrimaryButton>
+            <PrimaryButton href="/producers">Scopri i produttori</PrimaryButton>
             <SecondaryButton href="#services">Come funziona</SecondaryButton>
           </div>
         </div>
       </section>
 
-      {/* SERVICES */}
+      
+{/* CONTENT SHEET (double-layer) */}
+<div
+  className="relative z-10 md:-mt-24 -mt-20"
+  style={{
+    borderColor: "var(--line)",
+    background: "var(--bg)",
+    
+  }}
+>
+  <div className="pt-0">
+{/* SERVICES */}
       <section id="services" className="mx-auto max-w-6xl px-4 py-14">
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -180,7 +154,7 @@ export default function Home() {
             </p>
 
             <a
-              href="#producers"
+              href="/producers"
               className="mt-7 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition hover:opacity-95"
               style={{
                 background: "linear-gradient(135deg, var(--brand), var(--brand2))",
@@ -201,7 +175,7 @@ export default function Home() {
                 boxShadow: "var(--shadow2)",
               }}
             >
-              <img src="/about/about.png" alt="Chi siamo" className="mx-auto block w-full max-w-[520px]" />
+              <img src="/about/about.png" alt="Chi siamo" className="mx-auto block w-full max-w-[520px] h-auto max-h-[360px] md:max-h-[420px] object-contain" />
             </div>
           </div>
         </div>
@@ -294,7 +268,7 @@ export default function Home() {
               <div>
                 <div className="font-semibold">Prodotto</div>
                 <ul className="mt-2 space-y-2" style={{ color: "var(--muted)" }}>
-                  <li><a href="#producers" className="hover:underline">Produttori</a></li>
+                  <li><a href="/producers" className="hover:underline">Produttori</a></li>
                   <li><a href="#services" className="hover:underline">Servizi</a></li>
                   <li><a href="#numbers" className="hover:underline">Numeri</a></li>
                 </ul>
@@ -323,6 +297,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+  </div>
+</div>
     </div>
   );
 }

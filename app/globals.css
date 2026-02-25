@@ -54,3 +54,19 @@ body{
   background: var(--bg);
   color: var(--ink);
 }
+
+/* Dark selects (native <select>) */
+select.select-dark{
+  background: var(--surface2);
+  color: var(--ink);
+}
+
+select.select-dark option{
+  background: var(--bg);
+  color: var(--ink);
+}
+
+select.select-dark:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(114,129,86,.22);
+}
