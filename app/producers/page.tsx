@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import DarkSelect from "@/components/DarkSelect";
 import { producers } from "@/lib/data/producers";
 import type { Producer } from "@/lib/types";
 
@@ -90,16 +91,18 @@ export default function ProducersPage() {
             <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
               Ordina
             </label>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
-              className="select-dark rounded-full border px-4 py-2 text-sm font-semibold"
-              style={{ borderColor: "var(--line)" }}
-            >
-              <option value="stato">Disponibilità</option>
-              <option value="distanza">Distanza</option>
-              <option value="nome">Nome</option>
-            </select>
+            <div className="w-[190px]">
+              <DarkSelect
+                ariaLabel="Ordina produttori"
+                value={sort}
+                onChange={(v) => setSort(v as SortKey)}
+                options={[
+                  { value: "stato", label: "Disponibilità" },
+                  { value: "distanza", label: "Distanza" },
+                  { value: "nome", label: "Nome" },
+                ]}
+              />
+            </div>
           </div>
         </div>
 
@@ -117,18 +120,12 @@ export default function ProducersPage() {
           </div>
 
           <div className="md:col-span-3">
-            <select
+            <DarkSelect
+              ariaLabel="Filtra per categoria"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="select-dark w-full rounded-2xl border px-4 py-3 text-sm font-semibold"
-              style={{ borderColor: "var(--line)" }}
-            >
-              {categories.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
+              onChange={(v) => setCategory(v)}
+              options={categories.map((c) => ({ value: c, label: c }))}
+            />
           </div>
 
           <div className="md:col-span-3 flex flex-wrap items-center justify-start gap-2 md:justify-end">

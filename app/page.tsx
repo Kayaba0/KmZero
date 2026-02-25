@@ -33,7 +33,7 @@ function SecondaryButton({ href, children }: { href: string; children: ReactNode
   );
 }
 
-function ServiceCard({ title, desc }: { title: string; desc: string }) {
+function ServiceCard({ title, desc, href }: { title: string; desc: string; href: string }) {
   return (
     <article
       className="rounded-2xl border p-5 transition hover:-translate-y-0.5"
@@ -48,7 +48,7 @@ function ServiceCard({ title, desc }: { title: string; desc: string }) {
         {desc}
       </p>
       <a
-        href="#"
+        href={href}
         className="mt-4 inline-flex items-center gap-2 text-sm font-semibold"
         style={{ color: "var(--accent2)" }}
       >
@@ -130,10 +130,26 @@ export default function Home() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-4">
-          <ServiceCard title="Prenotazione rapida" desc="Seleziona prodotti e invia una richiesta in pochi passaggi." />
-          <ServiceCard title="Cassette settimanali" desc="Piani flessibili con contenuto stagionale e tracciabile." />
-          <ServiceCard title="Ritiro o consegna" desc="Scegli punto di ritiro o consegna (se disponibile)." />
-          <ServiceCard title="Preferiti & storico" desc="Salva produttori e riordina senza perdere tempo." />
+          <ServiceCard
+            title="Prenotazione rapida"
+            desc="Seleziona prodotti e invia una richiesta in pochi passaggi."
+            href="/services/prenotazione-rapida"
+          />
+          <ServiceCard
+            title="Cassette settimanali"
+            desc="Piani flessibili con contenuto stagionale e tracciabile."
+            href="/services/cassette-settimanali"
+          />
+          <ServiceCard
+            title="Ritiro o consegna"
+            desc="Scegli punto di ritiro o consegna (se disponibile)."
+            href="/services/ritiro-o-consegna"
+          />
+          <ServiceCard
+            title="Preferiti & storico"
+            desc="Salva produttori e riordina senza perdere tempo."
+            href="/services/preferiti-e-storico"
+          />
         </div>
       </section>
 
@@ -220,7 +236,7 @@ export default function Home() {
             <h2 className="mt-2 text-2xl font-semibold tracking-tight">Una selezione dalla tua zona</h2>
           </div>
           <a
-            href="#"
+            href="/producers"
             className="hidden rounded-full border px-4 py-2 text-sm font-semibold md:inline-flex"
             style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
           >
@@ -230,13 +246,13 @@ export default function Home() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            { title: "Azienda Agricola Rossi", meta: "Bio • 4 km • Ortaggi", img: "/producers/farm.svg" },
-            { title: "Frutteto del Sole", meta: "Stagionale • 7 km • Frutta", img: "/producers/orchard.svg" },
-            { title: "Mercato Verde", meta: "Selezione locale • 2 km", img: "/producers/market.svg" },
+            { slug: "azienda-agricola-rossi", title: "Azienda Agricola Rossi", meta: "Bio • 4 km • Ortaggi", img: "/producers/farm.svg" },
+            { slug: "frutteto-del-sole", title: "Frutteto del Sole", meta: "Stagionale • 7 km • Frutta", img: "/producers/orchard.svg" },
+            { slug: "mercato-verde", title: "Mercato Verde", meta: "Selezione locale • 2 km", img: "/producers/market.svg" },
           ].map((p) => (
             <a
               key={p.title}
-              href="#"
+              href={`/producers/${p.slug}`}
               className="group overflow-hidden rounded-3xl border"
               style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}
             >

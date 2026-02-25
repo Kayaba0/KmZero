@@ -1,4 +1,4 @@
-import ThemeToggle from "@/components/ThemeToggle";
+import LoginButton from "@/components/LoginButton";
 import Link from "next/link";
 
 export default function SiteHeader() {
@@ -48,7 +48,7 @@ export default function SiteHeader() {
           >
             Contatti
           </Link>
-          <ThemeToggle />
+          <LoginButton />
         </div>
       </div>
     </header>
