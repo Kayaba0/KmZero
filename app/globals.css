@@ -31,22 +31,40 @@
 
 /* Light theme (higher contrast) */
 html.light{
-  --bg: #FDFBF0;
-  --ink: #0F1A10;
-  --muted: rgba(15, 26, 16, .70);
-  --line: rgba(15, 26, 16, .18);
+  --bg: #E3EED4;
+  --ink: #0F2A1D;
+  --muted: rgba(15, 42, 29, .72);
+  --line: rgba(15, 42, 29, .18);
 
-  --surface: rgba(253, 251, 240, .90);
-  --surface2: rgba(253, 251, 240, .98);
+  --surface: rgba(253, 251, 240, .86);
+  --surface2: rgba(253, 251, 240, .96);
 
-  --brand: #2C3A29;  /* darker for CTA contrast */
-  --brand2:#465940;
-  --accent:#465940;
-  --accent2:#728156;
+  --brand: #375534;
+  --brand2:#0F2A1D;
+  --accent:#6B9071;
+  --accent2:#AEC3B0;
 
-  --shadow: 0 22px 60px rgba(0,0,0,.12);
-  --shadow2: 0 14px 40px rgba(0,0,0,.10);
+  --shadow: 0 22px 60px rgba(15,42,29,.10);
+  --shadow2: 0 14px 40px rgba(15,42,29,.08);
 }
+
+html.light .kmz-about-card{
+  background: linear-gradient(135deg, rgba(15,42,29,.92), rgba(55,85,52,.92));
+  border-color: rgba(15,42,29,.22);
+}
+html.light .kmz-about-card img{
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,.25));
+}
+
+/* Light theme readability tweaks */
+html.light .hero-subtext{
+  color: rgba(255,255,255,.92) !important;
+}
+
+/* Swap About image in light theme */
+html.light .kmz-about-img-dark{ display: none; }
+html.light .kmz-about-img-light{ display: block; }
+
 
 html, body { height: 100%; }
 

@@ -1,4 +1,5 @@
 import LoginButton from "@/components/LoginButton";
+import ThemeToggle from "@/components/ThemeToggle";
 import Link from "next/link";
 
 export default function SiteHeader() {
@@ -41,6 +42,8 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* Switch BEFORE Contatti */}
+          <ThemeToggle />
           <Link
             href="/#contact"
             className="hidden rounded-full border px-4 py-2 text-sm font-semibold md:inline-flex"

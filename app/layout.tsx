@@ -16,6 +16,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it">
+      <head>
+        {/* Avoid theme flash: apply saved theme before hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('kmzero_theme');if(t==='light'){document.documentElement.classList.add('light');}}catch(e){}})();",
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

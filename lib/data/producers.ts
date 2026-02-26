@@ -10,7 +10,7 @@ export const producers: Producer[] = [
     categories: ["Ortaggi", "Erbe aromatiche"],
     pickup: true,
     delivery: true,
-    coverImage: "/producers/farm.svg",
+    coverImage: "/producers/real-1.jpg",
     location: "Milano • Navigli",
     // coordinate fittizie (Milano)
     lat: 45.4536,
@@ -36,7 +36,7 @@ export const producers: Producer[] = [
     categories: ["Frutta"],
     pickup: true,
     delivery: false,
-    coverImage: "/producers/orchard.svg",
+    coverImage: "/producers/real-2.jpg",
     location: "Milano • Isola",
     // coordinate fittizie (Milano)
     lat: 45.484,
@@ -62,7 +62,7 @@ export const producers: Producer[] = [
     categories: ["Ortaggi", "Frutta", "Pane"],
     pickup: true,
     delivery: true,
-    coverImage: "/producers/market.svg",
+    coverImage: "/producers/real-3.jpg",
     location: "Milano • Porta Romana",
     // coordinate fittizie (Milano)
     lat: 45.453,
