@@ -49,11 +49,11 @@ export default function CartDrawer() {
       />
       <aside
         className={[
-          "absolute right-0 top-0 h-full w-full max-w-md transition-transform",
+          "absolute right-0 top-0 h-full w-full max-w-md transition-transform flex flex-col",
           state.isOpen ? "translate-x-0" : "translate-x-full",
         ].join(" ")}
         style={{
-          background: "var(--panel)",
+          background: "var(--bg)",
           borderLeft: "1px solid var(--line)",
           color: "var(--ink)",
         }}
@@ -74,7 +74,7 @@ export default function CartDrawer() {
           </button>
         </div>
 
-        <div className="h-[calc(100%-56px-64px)] overflow-auto px-5 py-4">
+        <div className="flex-1 overflow-auto px-5 py-4">
           {state.items.length === 0 ? (
             <div className="rounded-2xl border p-4" style={{ borderColor: "var(--line)", color: "var(--muted)" }}>
               Nessun prodotto nel carrello. Aggiungi qualcosa dalla scheda produttore.
@@ -153,7 +153,7 @@ export default function CartDrawer() {
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-3 px-5 py-4" style={{ borderTop: "1px solid var(--line)" }}>
+        <div className="flex items-center justify-between gap-3 px-5 py-4" style={{ borderTop: "1px solid var(--line)", paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)" }}>
           <button
             onClick={clear}
             className="rounded-full border px-4 py-2 text-sm font-semibold"

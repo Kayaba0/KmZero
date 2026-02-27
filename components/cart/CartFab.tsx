@@ -12,7 +12,7 @@ export default function CartFab() {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-6 right-6 z-[70] flex items-center gap-2 rounded-full border px-4 py-3 shadow-lg"
+      className="hidden md:flex fixed bottom-6 right-6 z-[70] items-center gap-2 rounded-full border px-4 py-3 shadow-lg"
       style={{
         borderColor: "var(--line)",
         background: "var(--panel)",

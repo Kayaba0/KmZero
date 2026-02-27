@@ -28,7 +28,7 @@ type CartApi = {
   toggle: () => void;
 };
 
-const CartContext = React.createContext<CartApi | null>(null);
+export const CartContext = React.createContext<CartApi | null>(null);
 
 const STORAGE_KEY = "kmzero_cart_v1";
 
@@ -77,7 +77,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           }
           return [...prev, { ...incoming, qty: 1 }];
         });
-        setIsOpen(true);
+        if (typeof window !== "undefined") {
+          try {
+            if (window.matchMedia("(min-width: 768px)").matches) setIsOpen(true);
+          } catch {}
+        }
       },
       removeItem: (id) => setItems((prev) => prev.filter((x) => x.id !== id)),
       setQty: (id, qty) =>
@@ -92,6 +96,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items, isOpen]);
 
   return <CartContext.Provider value={api}>{children}</CartContext.Provider>;
+}
+
+export function useOptionalCart() {
+  return React.useContext(CartContext);
 }
 
 export function useCart() {

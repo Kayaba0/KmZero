@@ -1,5 +1,6 @@
 import LoginButton from "@/components/LoginButton";
 import ThemeToggle from "@/components/ThemeToggle";
+import CartHeaderButton from "@/components/cart/CartHeaderButton";
 import Link from "next/link";
 
 export default function SiteHeader() {
@@ -19,7 +20,7 @@ export default function SiteHeader() {
             />
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-tight">KmZero</div>
-              <div className="text-xs" style={{ color: "var(--muted)" }}>
+              <div className="hidden text-xs md:block" style={{ color: "var(--muted)" }}>
                 Produttori locali • Prenotazioni
               </div>
             </div>
@@ -44,6 +45,7 @@ export default function SiteHeader() {
         <div className="flex items-center gap-2">
           {/* Switch a sinistra di Contatti */}
           <ThemeToggle />
+          <CartHeaderButton />
 
           <Link
             href="/#contact"
