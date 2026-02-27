@@ -11,16 +11,11 @@ export default function ProducerDetailPage({ params }: { params: { slug: string 
     return (
       <div className="min-h-screen">
         <SiteHeader />
-        <main className="mx-auto max-w-4xl px-4 py-14">
-          <div
-            className="rounded-3xl border p-8 text-center"
-            style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}
-          >
-            <div className="text-sm font-semibold">Produttore non trovato</div>
-            <Link href="/producers" className="mt-4 inline-flex text-sm font-semibold hover:opacity-80" style={{ color: "var(--accent2)" }}>
-              Torna ai produttori →
-            </Link>
-          </div>
+        <main className="mx-auto max-w-6xl px-6 py-10">
+          <h1 className="text-2xl font-semibold">Produttore non trovato</h1>
+          <Link className="mt-4 inline-flex underline opacity-80" href="/producers">
+            Torna ai produttori →
+          </Link>
         </main>
       </div>
     );
@@ -30,121 +25,98 @@ export default function ProducerDetailPage({ params }: { params: { slug: string 
     <div className="min-h-screen">
       <SiteHeader />
 
-      <main className="mx-auto max-w-6xl px-4 py-12">
-        <div className="mb-6">
-          <Link href="/producers" className="text-sm font-semibold hover:opacity-80" style={{ color: "var(--accent2)" }}>
-            ← Tutti i produttori
-          </Link>
-        </div>
+      <main className="mx-auto max-w-6xl px-6 pb-16 pt-8">
+        <Link href="/producers" className="inline-flex items-center gap-2 opacity-80 hover:opacity-100">
+          ← Tutti i produttori
+        </Link>
 
-        {/* TOP: Info (60%) + Mappa (40%) */}
-        <div className="grid gap-6 md:grid-cols-10 items-stretch">
-          <section
-            className="overflow-hidden rounded-3xl border md:col-span-6 h-full flex flex-col"
-            style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}
-          >
-            <img src={producer.coverImage} alt="" className="h-56 w-full object-cover" />
+        {/* TOP: Info (60%) + Mappa (40%) — lasciato invariato */}
+        <section className="mt-6 grid gap-6 lg:grid-cols-5">
+          <div className="lg:col-span-3 rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
+            <div className="relative aspect-[16/9] w-full">
+              <img src={producer.coverImage} alt={producer.name} className="h-full w-full object-cover" />
+            </div>
 
-            <div className="p-6 flex-1 flex flex-col">
-              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-                Produttore
-              </div>
-
-              <h1 className="mt-2 text-3xl font-semibold tracking-tight">{producer.name}</h1>
-              <p className="mt-2 text-sm font-semibold" style={{ color: "var(--accent2)" }}>
-                {producer.tagline}
-              </p>
-
-              <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                {producer.description}
-              </p>
+            <div className="p-8">
+              <div className="text-xs uppercase tracking-wider opacity-70">Produttore</div>
+              <h1 className="mt-2 text-4xl font-semibold leading-tight">{producer.name}</h1>
+              <p className="mt-3 text-lg opacity-80">{producer.tagline}</p>
+              <p className="mt-3 opacity-70">{producer.description}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {producer.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border px-3 py-1 text-xs font-semibold"
-                    style={{ borderColor: "var(--line)", color: "var(--muted)", background: "transparent" }}
-                  >
+                  <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm">
                     {t}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border px-4 py-3" style={{ borderColor: "var(--line)", background: "transparent" }}>
-                  <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-                    Zona
-                  </div>
-                  <div className="mt-1 text-sm font-semibold">{producer.location}</div>
-                  <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                    {producer.distanceKm} km
-                  </div>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-xs uppercase tracking-wider opacity-70">Zona</div>
+                  <div className="mt-2 font-medium">{producer.location}</div>
+                  <div className="opacity-70">{producer.distanceKm} km</div>
                 </div>
 
-                <div className="rounded-2xl border px-4 py-3" style={{ borderColor: "var(--line)", background: "transparent" }}>
-                  <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-                    Orari
-                  </div>
-                  <div className="mt-1 text-sm font-semibold">{producer.opening}</div>
-                  <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                    Ritiro: {producer.pickup ? producer.pickupDays?.join(" · ") : "—"} • Consegna: {producer.delivery ? "Sì" : "No"}
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-xs uppercase tracking-wider opacity-70">Orari</div>
+                  <div className="mt-2 font-medium">{producer.opening}</div>
+                  <div className="opacity-70">
+                    Ritiro: {producer.pickup ? producer.pickupDays?.join(" · ") : "—"} • Consegna:{" "}
+                    {producer.delivery ? "Sì" : "No"}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-7">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold hover:opacity-90"
-                  style={{
-                    borderColor: "var(--line)",
-                    background: "linear-gradient(135deg, var(--brand), var(--brand2))",
-                    color: "rgba(253,251,240,.96)",
-                  }}
-                >
-                  Prenota (coming soon) <span aria-hidden>→</span>
-                </button>
-              </div>
+              <button
+                className="mt-7 inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-semibold"
+                style={{ background: "var(--accent)", color: "white" }}
+              >
+                Prenota (coming soon) →
+              </button>
             </div>
-          </section>
+          </div>
 
-          <aside className="md:col-span-4 h-full">
-            <MapEmbed lat={producer.lat} lng={producer.lng} label={`Zona: ${producer.location}`} />
-          </aside>
-        </div>
+          <div className="lg:col-span-2 rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
+            <div className="p-6 flex items-center justify-between">
+              <div className="font-semibold">{producer.location}</div>
+              <a
+                className="text-sm opacity-80 hover:opacity-100 underline"
+                target="_blank"
+                rel="noreferrer"
+                href={`https://www.google.com/maps?q=${producer.lat},${producer.lng}`}
+              >
+                Apri su Google Maps →
+              </a>
+            </div>
+            <div className="h-[420px]">
+              <MapEmbed lat={producer.lat} lng={producer.lng} />
+            </div>
+          </div>
+        </section>
 
         {/* CATALOGO */}
-        <section
-          className="mt-10 overflow-hidden rounded-3xl border"
-          style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}
-        >
-          <div className="p-6">
-            <div className="flex items-end justify-between gap-4">
-              <h2 className="text-3xl font-semibold tracking-tight">Prodotti disponibili</h2>
-              <div className="text-xs font-semibold" style={{ color: "var(--muted)" }}>
-                * Dati demo
-              </div>
-            </div>
+        <section className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-8">
+          <h2 className="text-3xl font-semibold">Prodotti disponibili</h2>
 
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* 4 colonne su desktop */}
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {producer.products.map((p) => (
               <ProductCard
                 key={p.name}
+                imageSrc={p.image}
                 name={p.name}
                 price={p.price}
                 description={p.description}
                 availability={p.availability}
-                imageSrc={p.image}
                 tags={p.tags}
               />
             ))}
-            </div>
-
-            <p className="mt-6 text-sm" style={{ color: "var(--muted)" }}>
-              Prezzi e disponibilità dei prodotti possono variare. Contattaci per informazioni aggiornate.
-            </p>
           </div>
+
+          <p className="mt-6 text-sm opacity-70">
+            Prezzi e disponibilità dei prodotti possono variare. Contattaci per informazioni aggiornate.
+          </p>
         </section>
       </main>
     </div>

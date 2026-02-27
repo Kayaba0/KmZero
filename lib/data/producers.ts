@@ -12,13 +12,11 @@ export const producers: Producer[] = [
     delivery: true,
     coverImage: "/producers/real_1.jpg",
     location: "Milano • Navigli",
-    // coordinate fittizie (Milano)
     lat: 45.4536,
     lng: 9.1736,
     description:
       "Produzione a ciclo stagionale con disponibilità reale aggiornata. Ideale per cassette miste e verdure da foglia.",
     opening: "Mar–Sab 8:00–13:00 • 15:30–19:00",
-
     pickupDays: ["Mar", "Gio", "Sab"],
     status: "Aperto",
     products: [
@@ -46,6 +44,55 @@ export const producers: Producer[] = [
         description: "Carote dolci e croccanti cresciute senza l'uso di sostanze chimiche.",
         tags: ["Vegetale", "Biologico", "Locale"],
       },
+
+      {
+        name: "Zucchine",
+        price: "€2,40 / kg",
+        availability: "Disponibile",
+        image: "/products/lettuce.jpg",
+        description: "Tenere e saporite, perfette alla griglia o in padella.",
+        tags: ["Vegetale", "Locale"],
+      },
+      {
+        name: "Patate novelle",
+        price: "€1,80 / kg",
+        availability: "Disponibile",
+        image: "/products/carrots.jpg",
+        description: "Dolci e farinose, ideali al forno.",
+        tags: ["Vegetale", "Km Zero"],
+      },
+      {
+        name: "Cipolle dorate",
+        price: "€1,60 / kg",
+        availability: "Disponibile",
+        image: "/products/tomatoes.jpg",
+        description: "Ottime per soffritti e zuppe, coltivazione stagionale.",
+        tags: ["Vegetale", "Locale"],
+      },
+      {
+        name: "Basilico (mazzetto)",
+        price: "€1,50",
+        availability: "Terminato",
+        image: "/products/lettuce.jpg",
+        description: "Aromatico e profumato, raccolto al momento.",
+        tags: ["Vegetale", "Biologico", "Locale"],
+      },
+      {
+        name: "Fragole",
+        price: "€4,20 / kg",
+        availability: "Terminato",
+        image: "/products/tomatoes.jpg",
+        description: "Dolci e mature, disponibilità limitata.",
+        tags: ["Biologico", "Locale"],
+      },
+      {
+        name: "Cassetta mista (5kg)",
+        price: "€16,00",
+        availability: "Su richiesta",
+        image: "/products/carrots.jpg",
+        description: "Mix di verdure stagionali, contenuto variabile.",
+        tags: ["Km Zero", "Locale"],
+      },
     ],
   },
   {
@@ -59,19 +106,38 @@ export const producers: Producer[] = [
     delivery: false,
     coverImage: "/producers/real_2.jpg",
     location: "Milano • Isola",
-    // coordinate fittizie (Milano)
     lat: 45.484,
     lng: 9.1886,
     description:
       "Frutta selezionata, maturazione naturale e lotti piccoli. Prenota e ritira in azienda o ai punti convenzionati.",
     opening: "Mer–Sab 9:00–12:30",
-
     pickupDays: ["Mer", "Ven", "Sab"],
     status: "Su prenotazione",
     products: [
-      { name: "Mele (varietà del mese)", price: "€2,60 / kg", availability: "Disponibile", image: "/products/apple.svg", description: "Croccanti e profumate, maturazione naturale.", tags: ["Stagionale"] },
-      { name: "Pere", price: "€2,90 / kg", availability: "Disponibile", image: "/products/pear.svg", description: "Polpa succosa e dolcezza equilibrata.", tags: ["Km Zero"] },
-      { name: "Confettura artigianale", price: "€5,50", availability: "Su richiesta", image: "/products/jam.svg", description: "Solo frutta, cottura lenta e vasetti piccoli.", tags: ["Bio"] },
+      {
+        name: "Mele (varietà del mese)",
+        price: "€2,60 / kg",
+        availability: "Disponibile",
+        image: "/products/apple.svg",
+        description: "Croccanti e profumate, maturazione naturale.",
+        tags: ["Stagionale"],
+      },
+      {
+        name: "Pere",
+        price: "€2,90 / kg",
+        availability: "Disponibile",
+        image: "/products/pear.svg",
+        description: "Polpa succosa e dolcezza equilibrata.",
+        tags: ["Km Zero"],
+      },
+      {
+        name: "Confettura artigianale",
+        price: "€5,50",
+        availability: "Su richiesta",
+        image: "/products/jam.svg",
+        description: "Solo frutta, cottura lenta e vasetti piccoli.",
+        tags: ["Bio"],
+      },
     ],
   },
   {
@@ -85,19 +151,38 @@ export const producers: Producer[] = [
     delivery: true,
     coverImage: "/producers/real_3.jpg",
     location: "Milano • Porta Romana",
-    // coordinate fittizie (Milano)
     lat: 45.453,
     lng: 9.2043,
     description:
       "Una vetrina curata di produttori della zona: ordina online e ritira in giornata. Consegna su alcune zone.",
     opening: "Lun–Sab 8:30–19:30",
-
     pickupDays: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
     status: "Aperto",
     products: [
-      { name: "Pomodori da insalata", price: "€3,20 / kg", availability: "Disponibile", image: "/products/tomatoes.jpg", description: "Sodi e saporiti, ideali per caprese e insalate.", tags: ["Km Zero"] },
-      { name: "Pane integrale", price: "€3,80", availability: "Disponibile", image: "/products/bread.svg", description: "Lievitazione naturale, farina macinata a pietra.", tags: ["Selezione locale"] },
-      { name: "Uova (6 pz)", price: "€2,90", availability: "Su richiesta", image: "/products/eggs.svg", description: "Da allevamenti locali, lotti limitati.", tags: ["Km Zero"] },
+      {
+        name: "Pomodori da insalata",
+        price: "€3,20 / kg",
+        availability: "Disponibile",
+        image: "/products/tomatoes.jpg",
+        description: "Sodi e saporiti, ideali per caprese e insalate.",
+        tags: ["Km Zero"],
+      },
+      {
+        name: "Pane integrale",
+        price: "€3,80",
+        availability: "Disponibile",
+        image: "/products/bread.svg",
+        description: "Lievitazione naturale, farina macinata a pietra.",
+        tags: ["Selezione locale"],
+      },
+      {
+        name: "Uova (6 pz)",
+        price: "€2,90",
+        availability: "Su richiesta",
+        image: "/products/eggs.svg",
+        description: "Da allevamenti locali, lotti limitati.",
+        tags: ["Km Zero"],
+      },
     ],
   },
 ];
