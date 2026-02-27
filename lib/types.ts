@@ -1,15 +1,12 @@
-export type ProducerTag = "Bio" | "Stagionale" | "Km Zero" | "Selezione locale";
-
 export type Producer = {
   slug: string;
   name: string;
   tagline: string;
   distanceKm: number;
-  tags: ProducerTag[];
   categories: string[]; // e.g. ["Ortaggi", "Frutta", "Uova"]
   pickup: boolean;
   delivery: boolean;
-  coverImage: string; // public path
+  coverImage: string; // public path or remote URL
   location: string;
   // coordinate per mappa
   lat: number;
@@ -27,7 +24,6 @@ export type Producer = {
     price: string;
     availability: "Disponibile" | "Su richiesta" | "Terminato";
     description?: string;
-    image?: string; // public path (es. /products/tomato.svg)
-    tags?: string[];
+    image?: string; // public path or remote URL
   }>;
 };

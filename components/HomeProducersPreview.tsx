@@ -28,7 +28,6 @@ export default function HomeProducersPreview() {
         >
           <div className="text-lg font-semibold">{p.name}</div>
           <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-            {p.tags?.[0] ? `${p.tags[0]} • ` : ""}
             {p.distanceKm} km • {p.categories?.[0] ?? "Prodotti"}
           </div>
           <div className="mt-3 text-sm font-semibold" style={{ color: "var(--accent)" }}>

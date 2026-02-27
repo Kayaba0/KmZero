@@ -14,7 +14,6 @@ type Props = {
   price: string;
   description?: string;
   availability?: "Disponibile" | "Terminato" | "Su richiesta";
-  tags?: string[];
 };
 
 export default function ProductCard({
@@ -25,7 +24,6 @@ export default function ProductCard({
   price,
   description,
   availability,
-  tags = [],
 }: Props) {
   const { addItem } = useCart();
 
@@ -69,27 +67,6 @@ export default function ProductCard({
             {price}
           </div>
         </div>
-
-        {tags.length ? (
-          <div className="-mx-1 flex items-center gap-1 overflow-x-auto px-1 pb-1" style={{ WebkitOverflowScrolling: "touch" }}>
-            {tags.slice(0, 3).map((t) => (
-              <span
-                key={t}
-                className="inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-semibold"
-                style={{
-                  borderColor: "var(--line)",
-                  background: "rgba(255,255,255,0.06)",
-                  color: "var(--ink)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <span aria-hidden>🍃</span>
-                {t}
-              </span>
-            ))}
-          </div>
-        ) : null}
-
         {description ? (
           <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
             {description}

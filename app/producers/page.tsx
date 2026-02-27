@@ -32,13 +32,6 @@ function ProducerCard({ p }: { p: Producer }) {
             {p.distanceKm} km
           </div>
         </div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {p.tags.map((t) => (
-            <span key={t} className="rounded-full border px-2.5 py-1 text-xs font-semibold" style={{ borderColor: "var(--line)" }}>
-              {t}
-            </span>
-          ))}
-        </div>
       </div>
     </Link>
   );

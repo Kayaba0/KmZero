@@ -53,18 +53,6 @@ export default function ProducerDetailPage({ params }: { params: { slug: string 
                   {producer.description}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {producer.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border px-3 py-1 text-xs font-semibold"
-                      style={{ borderColor: "var(--line)", background: "rgba(255,255,255,0.06)" }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border p-4" style={{ borderColor: "var(--line)", background: "rgba(255,255,255,0.03)" }}>
                     <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
@@ -100,22 +88,8 @@ export default function ProducerDetailPage({ params }: { params: { slug: string 
               </div>
             </section>
 
-            <section className="lg:col-span-4 rounded-[32px] border overflow-hidden" style={{ borderColor: "var(--line)", background: "rgba(255,255,255,0.03)" }}>
-              <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: "1px solid var(--line)" }}>
-                <div className="text-sm font-semibold">{producer.location}</div>
-                <a
-                  href={`https://www.google.com/maps?q=${producer.lat},${producer.lng}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm font-semibold"
-                  style={{ color: "var(--accent)" }}
-                >
-                  Apri su Google Maps →
-                </a>
-              </div>
-              <div className="h-[420px]">
-                <MapEmbed lat={producer.lat} lng={producer.lng} title={producer.location} />
-              </div>
+            <section className="lg:col-span-4">
+              <MapEmbed lat={producer.lat} lng={producer.lng} label={producer.location} />
             </section>
           </div>
 
@@ -134,8 +108,7 @@ export default function ProducerDetailPage({ params }: { params: { slug: string 
                   description={p.description}
                   imageSrc={p.image}
                   availability={p.availability}
-                  tags={p.tags}
-                />
+/>
               ))}
             </div>
 
