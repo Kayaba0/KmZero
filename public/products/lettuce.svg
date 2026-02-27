@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Insalata">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#E3EED4"/>
+      <stop offset="1" stop-color="#CFE1B9"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" rx="128" fill="url(#g)"/>
+  
+  <path d="M170 360c-10-110 40-200 86-214 46 14 96 104 86 214-72 40-186 40-172 0z" fill="#6B9071" opacity="0.95"/>
+  <path d="M210 354c-18-84 12-154 46-168 34 14 64 84 46 168-34 20-104 20-92 0z" fill="#AEC3B0"/>
+  <path d="M256 186v188" stroke="#0F2A1D" stroke-width="10" stroke-linecap="round" opacity="0.35"/>
+
+</svg>

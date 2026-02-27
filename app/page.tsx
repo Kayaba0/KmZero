@@ -89,10 +89,7 @@ export default function Home() {
             </span>
           </h1>
 
-          <p
-            className="hero-subtext mt-5 max-w-2xl text-sm leading-relaxed md:text-base"
-            style={{ color: "var(--muted)" }}
-          >
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed md:text-base" style={{ color: "var(--muted)" }}>
             Trova produttori della tua zona e prenota ortaggi, frutta e cassette settimanali.
             Trasparenza su origine, disponibilità e ritiro/consegna.
           </p>
@@ -188,26 +185,14 @@ export default function Home() {
 
           <div>
             <div
-              className="kmz-about-card rounded-3xl border p-6"
+              className="rounded-3xl border p-6"
               style={{
                 borderColor: "var(--line)",
                 background: "var(--surface2)",
                 boxShadow: "var(--shadow2)",
               }}
             >
-              {/* Dark theme image */}
-              <img
-                src="/about/about.png"
-                alt="Chi siamo"
-                className="kmz-about-img-dark mx-auto block w-full max-w-[520px] h-auto max-h-[360px] md:max-h-[420px] object-contain"
-              />
-
-              {/* Light theme image */}
-              <img
-                src="/images/about-light.png"
-                alt="Chi siamo"
-                className="kmz-about-img-light mx-auto hidden w-full max-w-[520px] h-auto max-h-[360px] md:max-h-[420px] object-contain"
-              />
+              <img src="/about/about.png" alt="Chi siamo" className="mx-auto block w-full max-w-[520px] h-auto max-h-[360px] md:max-h-[420px] object-contain" />
             </div>
           </div>
         </div>
@@ -261,29 +246,25 @@ export default function Home() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {producers.slice(0, 3).map((p) => {
-            const tag = p.tags?.[0] ?? "Km Zero";
-            const cat = p.categories?.[0] ?? "Locale";
-            const meta = `${tag} • ${p.distanceKm} km • ${cat}`;
-            return (
-
+          {producers.slice(0, 3).map((p) => (
             <a
               key={p.slug}
               href={`/producers/${p.slug}`}
               className="group overflow-hidden rounded-3xl border"
               style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}
             >
-              <img src={p.coverImage} alt="Immagine di riferimento" className="h-44 w-full object-cover" />
+              <img src={p.coverImage} alt={p.name} className="h-44 w-full object-cover" />
               <div className="p-5">
                 <div className="text-sm font-semibold">{p.name}</div>
-                <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>{meta}</div>
+                <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
+                  {p.tags?.[0] ? `${p.tags[0]} • ` : ""}{p.distanceKm} km • {p.categories?.[0] ?? "Prodotti"}
+                </div>
                 <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--accent2)" }}>
                   Visita profilo <span aria-hidden>→</span>
                 </div>
               </div>
             </a>
-            );
-          })}
+          ))}
         </div>
       </section>
 

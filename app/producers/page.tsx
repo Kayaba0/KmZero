@@ -3,205 +3,80 @@
 import * as React from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
-import DarkSelect from "@/components/DarkSelect";
-import { producers } from "@/lib/data/producers";
 import type { Producer } from "@/lib/types";
+import { loadProducersClient } from "@/lib/data/producersStore";
 
-type SortKey = "nome" | "distanza" | "stato";
-
-function Chip({ children }: { children: React.ReactNode }) {
+function ProducerCard({ p }: { p: Producer }) {
   return (
-    <span
-      className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold"
-      style={{ borderColor: "var(--line)", background: "transparent", color: "var(--muted)" }}
+    <Link
+      href={`/producers/${p.slug}`}
+      className="group block overflow-hidden rounded-2xl border"
+      style={{ borderColor: "var(--line)", background: "var(--card)" }}
     >
-      {children}
-    </span>
-  );
-}
-
-function StatusPill({ status }: { status: Producer["status"] }) {
-  const bg =
-    status === "Aperto" ? "rgba(114,129,86,.22)" : status === "Su prenotazione" ? "rgba(152,167,124,.18)" : "rgba(253,251,240,.08)";
-  const color =
-    status === "Aperto" ? "var(--accent2)" : status === "Su prenotazione" ? "var(--muted)" : "var(--muted)";
-
-  return (
-    <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold"
-      style={{ borderColor: "var(--line)", background: bg, color }}>
-      {status}
-    </span>
+      <div className="relative h-44 w-full overflow-hidden">
+        <img
+          src={p.coverImage}
+          alt={p.name}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
+      <div className="p-4">
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <div className="truncate text-lg font-semibold">{p.name}</div>
+            <div className="mt-1 truncate text-sm" style={{ color: "var(--muted)" }}>
+              {p.tagline}
+            </div>
+          </div>
+          <div className="shrink-0 rounded-full border px-3 py-1 text-xs font-semibold" style={{ borderColor: "var(--line)" }}>
+            {p.distanceKm} km
+          </div>
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {p.tags.map((t) => (
+            <span key={t} className="rounded-full border px-2.5 py-1 text-xs font-semibold" style={{ borderColor: "var(--line)" }}>
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Link>
   );
 }
 
 export default function ProducersPage() {
-  const [q, setQ] = React.useState("");
-  const [category, setCategory] = React.useState<string>("Tutte");
-  const [onlyBio, setOnlyBio] = React.useState(false);
-  const [onlyDelivery, setOnlyDelivery] = React.useState(false);
-  const [sort, setSort] = React.useState<SortKey>("stato");
+  const [producers, setProducers] = React.useState<Producer[]>([]);
 
-  const categories = React.useMemo(() => {
-    const set = new Set<string>();
-    producers.forEach((p) => p.categories.forEach((c) => set.add(c)));
-    return ["Tutte", ...Array.from(set).sort((a, b) => a.localeCompare(b))];
+  React.useEffect(() => {
+    setProducers(loadProducersClient());
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "kmzero_producers_v1") setProducers(loadProducersClient());
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const filtered = React.useMemo(() => {
-    const text = q.trim().toLowerCase();
-    return producers
-      .filter((p) => {
-        const matchesText =
-          !text ||
-          p.name.toLowerCase().includes(text) ||
-          p.tagline.toLowerCase().includes(text) ||
-          p.location.toLowerCase().includes(text) ||
-          p.categories.some((c) => c.toLowerCase().includes(text));
-        const matchesCategory = category === "Tutte" || p.categories.includes(category);
-        const matchesBio = !onlyBio || p.tags.includes("Bio");
-        const matchesDelivery = !onlyDelivery || p.delivery;
-        return matchesText && matchesCategory && matchesBio && matchesDelivery;
-      })
-      .sort((a, b) => {
-        if (sort === "nome") return a.name.localeCompare(b.name);
-        if (sort === "distanza") return a.distanceKm - b.distanceKm;
-        // stato: Aperto > Su prenotazione > Chiuso
-        const rank = (s: Producer["status"]) => (s === "Aperto" ? 0 : s === "Su prenotazione" ? 1 : 2);
-        return rank(a.status) - rank(b.status);
-      });
-  }, [q, category, onlyBio, onlyDelivery, sort]);
-
   return (
-    <div className="min-h-screen">
+    <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--ink)" }}>
       <SiteHeader />
-
-      <main className="mx-auto max-w-6xl px-4 py-12">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <main className="mx-auto max-w-6xl px-6 py-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
               Produttori
             </div>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight">Una selezione dalla tua zona</h1>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              Cerca per categoria, filtra per consegna o bio e apri la scheda per vedere prodotti e disponibilità.
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight">Trova chi produce vicino a te</h1>
+            <p className="mt-2 max-w-2xl text-sm" style={{ color: "var(--muted)" }}>
+              Sfoglia e apri la scheda per dettagli, orari e prodotti disponibili.
             </p>
           </div>
-
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--muted)" }}>
-              Ordina
-            </label>
-            <div className="w-[190px]">
-              <DarkSelect
-                ariaLabel="Ordina produttori"
-                value={sort}
-                onChange={(v) => setSort(v as SortKey)}
-                options={[
-                  { value: "stato", label: "Disponibilità" },
-                  { value: "distanza", label: "Distanza" },
-                  { value: "nome", label: "Nome" },
-                ]}
-              />
-            </div>
-          </div>
         </div>
 
-        {/* Controls */}
-        <div className="mt-8 grid gap-3 rounded-3xl border p-4 md:grid-cols-12 md:items-center"
-          style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}>
-          <div className="md:col-span-6">
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Cerca produttori, zone o categorie…"
-              className="w-full rounded-2xl border px-4 py-3 text-sm outline-none"
-              style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
-            />
-          </div>
-
-          <div className="md:col-span-3">
-            <DarkSelect
-              ariaLabel="Filtra per categoria"
-              value={category}
-              onChange={(v) => setCategory(v)}
-              options={categories.map((c) => ({ value: c, label: c }))}
-            />
-          </div>
-
-          <div className="md:col-span-3 flex flex-wrap items-center justify-start gap-2 md:justify-end">
-            <button
-              onClick={() => setOnlyBio((v) => !v)}
-              className="rounded-full border px-4 py-2 text-sm font-semibold"
-              style={{
-                borderColor: "var(--line)",
-                background: onlyBio ? "rgba(114,129,86,.20)" : "transparent",
-                color: "var(--ink)",
-              }}
-            >
-              Solo Bio
-            </button>
-            <button
-              onClick={() => setOnlyDelivery((v) => !v)}
-              className="rounded-full border px-4 py-2 text-sm font-semibold"
-              style={{
-                borderColor: "var(--line)",
-                background: onlyDelivery ? "rgba(114,129,86,.20)" : "transparent",
-                color: "var(--ink)",
-              }}
-            >
-              Consegna
-            </button>
-          </div>
-        </div>
-
-        {/* Results */}
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {filtered.map((p) => (
-            <Link
-              key={p.slug}
-              href={`/producers/${p.slug}`}
-              className="group overflow-hidden rounded-3xl border transition hover:-translate-y-0.5"
-              style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}
-            >
-              <img src={p.coverImage} alt="" className="h-44 w-full object-cover" />
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <div className="text-sm font-semibold">{p.name}</div>
-                    <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                      {p.location} • {p.distanceKm} km
-                    </div>
-                  </div>
-                  <StatusPill status={p.status} />
-                </div>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <Chip key={t}>{t}</Chip>
-                  ))}
-                </div>
-
-                <div className="mt-4 text-xs" style={{ color: "var(--muted)" }}>
-                  Ritiro: {p.pickup ? (p.pickupDays?.join(" · ") ?? "—") : "—"} • Consegna: {p.delivery ? "Sì" : "No"}
-                </div>
-
-                <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--accent2)" }}>
-                  Apri scheda <span aria-hidden>→</span>
-                </div>
-              </div>
-            </Link>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {producers.map((p) => (
+            <ProducerCard key={p.slug} p={p} />
           ))}
         </div>
-
-        {filtered.length === 0 && (
-          <div className="mt-12 rounded-3xl border p-8 text-center"
-            style={{ borderColor: "var(--line)", background: "var(--surface2)", boxShadow: "var(--shadow2)" }}>
-            <div className="text-sm font-semibold">Nessun risultato</div>
-            <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
-              Prova a cambiare filtri o a cercare per zona (es. “Navigli”, “Isola”).
-            </p>
-          </div>
-        )}
       </main>
     </div>
   );

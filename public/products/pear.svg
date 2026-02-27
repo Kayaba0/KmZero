@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Pera">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#E3EED4"/>
+      <stop offset="1" stop-color="#CFE1B9"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" rx="128" fill="url(#g)"/>
+  
+  <path d="M256 140c40 0 70 36 50 80-10 22-22 34-34 56 44 20 70 56 70 96 0 70-50 120-136 120s-136-50-136-120c0-40 26-76 70-96-12-22-24-34-34-56-20-44 10-80 50-80z" fill="#6B9071" opacity="0.95"/>
+  <path d="M256 140c0-22 10-40 30-54" stroke="#0F2A1D" stroke-width="14" stroke-linecap="round"/>
+
+</svg>

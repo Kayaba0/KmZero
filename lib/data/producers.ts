@@ -10,7 +10,7 @@ export const producers: Producer[] = [
     categories: ["Ortaggi", "Erbe aromatiche"],
     pickup: true,
     delivery: true,
-    coverImage: "/producers/real-1.jpg",
+    coverImage: "/producers/real_1.jpg",
     location: "Milano • Navigli",
     // coordinate fittizie (Milano)
     lat: 45.4536,
@@ -22,9 +22,30 @@ export const producers: Producer[] = [
     pickupDays: ["Mar", "Gio", "Sab"],
     status: "Aperto",
     products: [
-      { name: "Insalata gentile", price: "€2,20 / cespo", availability: "Disponibile" },
-      { name: "Zucchine", price: "€2,90 / kg", availability: "Disponibile" },
-      { name: "Cassetta mista (5kg)", price: "€16,00", availability: "Su richiesta" },
+      {
+        name: "Pomodori",
+        price: "€2,50 / kg",
+        availability: "Disponibile",
+        image: "/products/tomatoes.jpg",
+        description: "Deliziosi pomodori rossi coltivati biologicamente e raccolti a maturazione.",
+        tags: ["Vegetale", "Biologico", "Locale"],
+      },
+      {
+        name: "Insalata gentile",
+        price: "€1,20 / cespo",
+        availability: "Disponibile",
+        image: "/products/lettuce.jpg",
+        description: "Insalata fresca e croccante coltivata localmente senza pesticidi.",
+        tags: ["Vegetale", "Biologico", "Locale"],
+      },
+      {
+        name: "Carote",
+        price: "€2,00 / kg",
+        availability: "Disponibile",
+        image: "/products/carrots.jpg",
+        description: "Carote dolci e croccanti cresciute senza l'uso di sostanze chimiche.",
+        tags: ["Vegetale", "Biologico", "Locale"],
+      },
     ],
   },
   {
@@ -36,7 +57,7 @@ export const producers: Producer[] = [
     categories: ["Frutta"],
     pickup: true,
     delivery: false,
-    coverImage: "/producers/real-2.jpg",
+    coverImage: "/producers/real_2.jpg",
     location: "Milano • Isola",
     // coordinate fittizie (Milano)
     lat: 45.484,
@@ -48,9 +69,9 @@ export const producers: Producer[] = [
     pickupDays: ["Mer", "Ven", "Sab"],
     status: "Su prenotazione",
     products: [
-      { name: "Mele (varietà del mese)", price: "€2,60 / kg", availability: "Disponibile" },
-      { name: "Pere", price: "€2,90 / kg", availability: "Disponibile" },
-      { name: "Confettura artigianale", price: "€5,50", availability: "Su richiesta" },
+      { name: "Mele (varietà del mese)", price: "€2,60 / kg", availability: "Disponibile", image: "/products/apple.svg", description: "Croccanti e profumate, maturazione naturale.", tags: ["Stagionale"] },
+      { name: "Pere", price: "€2,90 / kg", availability: "Disponibile", image: "/products/pear.svg", description: "Polpa succosa e dolcezza equilibrata.", tags: ["Km Zero"] },
+      { name: "Confettura artigianale", price: "€5,50", availability: "Su richiesta", image: "/products/jam.svg", description: "Solo frutta, cottura lenta e vasetti piccoli.", tags: ["Bio"] },
     ],
   },
   {
@@ -62,7 +83,7 @@ export const producers: Producer[] = [
     categories: ["Ortaggi", "Frutta", "Pane"],
     pickup: true,
     delivery: true,
-    coverImage: "/producers/real-3.jpg",
+    coverImage: "/producers/real_3.jpg",
     location: "Milano • Porta Romana",
     // coordinate fittizie (Milano)
     lat: 45.453,
@@ -74,9 +95,9 @@ export const producers: Producer[] = [
     pickupDays: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
     status: "Aperto",
     products: [
-      { name: "Pomodori da insalata", price: "€3,20 / kg", availability: "Disponibile" },
-      { name: "Pane integrale", price: "€3,80", availability: "Disponibile" },
-      { name: "Uova (6 pz)", price: "€2,90", availability: "Su richiesta" },
+      { name: "Pomodori da insalata", price: "€3,20 / kg", availability: "Disponibile", image: "/products/tomatoes.jpg", description: "Sodi e saporiti, ideali per caprese e insalate.", tags: ["Km Zero"] },
+      { name: "Pane integrale", price: "€3,80", availability: "Disponibile", image: "/products/bread.svg", description: "Lievitazione naturale, farina macinata a pietra.", tags: ["Selezione locale"] },
+      { name: "Uova (6 pz)", price: "€2,90", availability: "Su richiesta", image: "/products/eggs.svg", description: "Da allevamenti locali, lotti limitati.", tags: ["Km Zero"] },
     ],
   },
 ];

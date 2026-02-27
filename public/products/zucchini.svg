@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Zucchine">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#E3EED4"/>
+      <stop offset="1" stop-color="#CFE1B9"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" rx="128" fill="url(#g)"/>
+  
+  <rect x="172" y="190" width="168" height="240" rx="84" fill="#375534" opacity="0.92"/>
+  <rect x="210" y="150" width="92" height="70" rx="35" fill="#0F2A1D" opacity="0.9"/>
+  <path d="M208 260c40 18 88 18 128 0" stroke="#E3EED4" stroke-width="10" stroke-linecap="round" opacity="0.35"/>
+  <path d="M208 310c40 18 88 18 128 0" stroke="#E3EED4" stroke-width="10" stroke-linecap="round" opacity="0.25"/>
+
+</svg>

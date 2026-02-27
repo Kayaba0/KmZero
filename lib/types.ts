@@ -26,5 +26,8 @@ export type Producer = {
     name: string;
     price: string;
     availability: "Disponibile" | "Su richiesta" | "Terminato";
+    description?: string;
+    image?: string; // public path (es. /products/tomato.svg)
+    tags?: string[];
   }>;
 };
