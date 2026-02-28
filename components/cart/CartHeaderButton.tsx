@@ -34,10 +34,9 @@ function CartIcon({ size = 20 }: { size?: number }) {
 
 export default function CartHeaderButton() {
   const cart = useOptionalCart();
-  if (!cart) return null;
 
-  const { state, toggle } = cart;
-  const count = state.items.reduce((s, x) => s + x.qty, 0);
+  const count = cart ? cart.state.items.reduce((s, x) => s + x.qty, 0) : 0;
+  const toggle = cart ? cart.toggle : () => {};
 
   const [bump, setBump] = React.useState(false);
   const prevCount = React.useRef(count);
@@ -52,7 +51,6 @@ export default function CartHeaderButton() {
     prevCount.current = count;
   }, [count]);
 
-  // keep ref in sync even when it decreases (remove items)
   React.useEffect(() => {
     prevCount.current = count;
   }, [count]);
@@ -61,14 +59,16 @@ export default function CartHeaderButton() {
     <button
       type="button"
       onClick={() => {
-        // tiny press feedback + open drawer
+        if (!cart) return;
         setBump(true);
         window.setTimeout(() => setBump(false), 160);
         toggle();
       }}
+      disabled={!cart}
       className={[
         "relative inline-flex h-10 w-10 items-center justify-center rounded-full border transition-transform duration-150",
         bump ? "scale-[1.06]" : "scale-100",
+        !cart ? "opacity-60" : "",
       ].join(" ")}
       style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
       aria-label="Apri carrello"
