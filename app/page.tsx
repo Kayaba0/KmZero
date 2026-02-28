@@ -258,7 +258,7 @@ export default function Home() {
               <div className="p-5">
                 <div className="text-sm font-semibold">{p.name}</div>
                 <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                  {p.tags?.[0] ? `${p.tags[0]} • ` : ""}{p.distanceKm} km • {p.categories?.[0] ?? "Prodotti"}
+                  {p.distanceKm} km • {p.categories?.[0] ?? "Prodotti"}
                 </div>
                 <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--accent2)" }}>
                   Visita profilo <span aria-hidden>→</span>
