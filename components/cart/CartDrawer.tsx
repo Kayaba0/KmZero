@@ -17,10 +17,11 @@ function groupByProducer(items: ReturnType<typeof useCart>["state"]["items"]) {
 }
 
 export default function CartDrawer() {
+  const { state, close, removeItem, setQty, clear } = useCart();
   // lock body scroll when cart is open (mobile fix)
   React.useEffect(() => {
     if (typeof document === "undefined") return;
-    if (open) {
+    if (state.isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -28,8 +29,8 @@ export default function CartDrawer() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
-  const { state, close, removeItem, setQty, clear } = useCart();
+  }, [state.isOpen]);
+
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
