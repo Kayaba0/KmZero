@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { useOptionalCart } from "./CartContext";
 
 function CartIcon({ size = 20 }: { size?: number }) {
@@ -38,19 +39,57 @@ export default function CartHeaderButton() {
   const { state, toggle } = cart;
   const count = state.items.reduce((s, x) => s + x.qty, 0);
 
+  const [bump, setBump] = React.useState(false);
+  const prevCount = React.useRef(count);
+
+  React.useEffect(() => {
+    // animate only when count increases
+    if (count > prevCount.current) {
+      setBump(true);
+      const t = window.setTimeout(() => setBump(false), 220);
+      return () => window.clearTimeout(t);
+    }
+    prevCount.current = count;
+  }, [count]);
+
+  // keep ref in sync even when it decreases (remove items)
+  React.useEffect(() => {
+    prevCount.current = count;
+  }, [count]);
+
   return (
     <button
       type="button"
-      onClick={toggle}
-      className="relative md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border"
+      onClick={() => {
+        // tiny press feedback + open drawer
+        setBump(true);
+        window.setTimeout(() => setBump(false), 160);
+        toggle();
+      }}
+      className={[
+        "relative inline-flex h-10 w-10 items-center justify-center rounded-full border transition-transform duration-150",
+        bump ? "scale-[1.06]" : "scale-100",
+      ].join(" ")}
       style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
       aria-label="Apri carrello"
     >
-      <CartIcon size={20} />
+      <span
+        className={[
+          "transition-transform duration-200",
+          bump ? "scale-[1.10]" : "scale-100",
+        ].join(" ")}
+      >
+        <CartIcon size={20} />
+      </span>
+
       {count > 0 && (
         <span
-          className="absolute -right-1 -top-1 inline-flex min-w-[18px] items-center justify-center rounded-full px-1.5 py-0.5 text-[10px] font-bold"
-          style={{ background: "var(--brand)", color: "var(--ink)", border: "1px solid var(--line)" }}
+          className={[
+            "absolute -right-1 -top-1 inline-flex min-w-[18px] items-center justify-center rounded-full px-1.5 py-0.5 text-[10px] font-bold",
+            "transition-transform duration-200",
+            bump ? "scale-[1.12]" : "scale-100",
+          ].join(" ")}
+          style={{ background: "var(--brand)", color: "#ffffff", border: "1px solid var(--line)" }}
         >
           {count}
         </span>

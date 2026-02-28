@@ -34,11 +34,11 @@ export default function SiteHeader() {
           <Link href="/#about" className="hover:opacity-80">
             Chi siamo
           </Link>
-          <Link href="/#numbers" className="hover:opacity-80">
-            Numeri
-          </Link>
           <Link href="/producers" className="hover:opacity-80">
             Produttori
+          </Link>
+          <Link href="/#contact" className="hover:opacity-80">
+            Contatti
           </Link>
         </nav>
 
@@ -46,14 +46,6 @@ export default function SiteHeader() {
           {/* Switch a sinistra di Contatti */}
           <ThemeToggle />
           <CartHeaderButton />
-
-          <Link
-            href="/#contact"
-            className="hidden rounded-full border px-4 py-2 text-sm font-semibold md:inline-flex"
-            style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
-          >
-            Contatti
-          </Link>
           <LoginButton />
         </div>
       </div>

@@ -25,6 +25,9 @@ export default function ProductCard({
   description,
   availability,
 }: Props) {
+  const [hovered, setHovered] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+
   const { addItem } = useCart();
 
   const isAvailable = availability === "Disponibile";
@@ -34,7 +37,7 @@ export default function ProductCard({
     <article
       className="group flex h-full flex-col overflow-hidden rounded-3xl border"
       style={{
-        borderColor: "var(--line)",
+        borderColor: disabled ? "var(--line)" : pressed ? "var(--accent2)" : hovered ? "var(--accent)" : "var(--line)",
         background: disabled ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.03)",
         filter: disabled ? "grayscale(20%)" : "none",
         opacity: disabled ? 0.65 : 1,
@@ -91,13 +94,34 @@ export default function ProductCard({
                 imageSrc,
               });
             }}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition"
+            className={[
+              "flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold",
+              "transition-all duration-200",
+              disabled ? "opacity-60" : "",
+              // hover only really matters on desktop
+              !disabled && hovered ? "md:shadow-[0_10px_28px_rgba(0,0,0,.35)]" : "",
+              !disabled && pressed ? "scale-[0.98]" : !disabled && hovered ? "scale-[1.01]" : "scale-100",
+            ].join(" ")}
             style={{
               borderColor: "var(--line)",
-              background: disabled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.06)",
+              background: disabled
+                ? "rgba(255,255,255,0.04)"
+                : pressed
+                ? "rgba(152,167,124,0.32)"
+                : hovered
+                ? "rgba(152,167,124,0.22)"
+                : "rgba(255,255,255,0.06)",
               color: disabled ? "rgba(255,255,255,0.5)" : "var(--ink)",
               cursor: disabled ? "not-allowed" : "pointer",
+              boxShadow: !disabled && pressed ? "0 8px 20px rgba(0,0,0,.35)" : "none",
             }}
+            onMouseEnter={() => !disabled && setHovered(true)}
+            onMouseLeave={() => {
+              setHovered(false);
+              setPressed(false);
+            }}
+            onMouseDown={() => !disabled && setPressed(true)}
+            onMouseUp={() => setPressed(false)}
             aria-disabled={disabled}
             disabled={disabled}
           >

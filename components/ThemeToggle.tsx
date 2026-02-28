@@ -8,8 +8,11 @@ const STORAGE_KEY = "kmzero_theme";
 
 function apply(theme: Theme) {
   const html = document.documentElement;
+  // add a tiny fade during theme switch
+  html.classList.add("theme-transition");
   if (theme === "light") html.classList.add("light");
   else html.classList.remove("light");
+  window.setTimeout(() => html.classList.remove("theme-transition"), 260);
 }
 
 export default function ThemeToggle() {

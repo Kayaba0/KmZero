@@ -61,9 +61,14 @@ html.light .hero-subtext{
   color: rgba(255,255,255,.92) !important;
 }
 
+
+/* About image swap defaults */
+.kmz-about-img-dark{ display:block !important; }
+.kmz-about-img-light{ display:none !important; }
+
 /* Swap About image in light theme */
-html.light .kmz-about-img-dark{ display: none; }
-html.light .kmz-about-img-light{ display: block; }
+html.light .kmz-about-img-dark{ display: none !important; }
+html.light .kmz-about-img-light{ display: block !important; }
 
 
 html, body { height: 100%; }
@@ -87,4 +92,10 @@ select.select-dark option{
 select.select-dark:focus{
   outline: none;
   box-shadow: 0 0 0 3px rgba(114,129,86,.22);
+}
+
+
+/* Smooth theme fade */
+html.theme-transition, html.theme-transition *{
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, fill .25s ease, stroke .25s ease;
 }

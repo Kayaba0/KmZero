@@ -1,4 +1,5 @@
 import "./globals.css";
+import CartRoot from "@/components/cart/CartRoot";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body><CartRoot>{children}</CartRoot></body>
     </html>
   );
 }

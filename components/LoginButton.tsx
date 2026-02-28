@@ -4,6 +4,37 @@ import * as React from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 
+
+const USER_KEY = "kmzero_user_v1";
+const USERS: Record<string, string> = {
+  marco: "marco",
+  andrea: "andrea",
+  gabriele: "gabriele",
+};
+
+function getUser(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(USER_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (typeof parsed === "string") return parsed;
+    if (parsed?.username) return String(parsed.username);
+    return null;
+  } catch {
+    const raw = window.localStorage.getItem(USER_KEY);
+    return raw ? raw : null;
+  }
+}
+
+function setUser(username: string | null) {
+  if (typeof window === "undefined") return;
+  if (!username) window.localStorage.removeItem(USER_KEY);
+  else window.localStorage.setItem(USER_KEY, JSON.stringify({ username }));
+  try {
+    window.dispatchEvent(new Event("kmzero_user_change"));
+  } catch {}
+}
 function isAdmin(): boolean {
   if (typeof window === "undefined") return false;
 
@@ -46,6 +77,7 @@ export default function LoginButton() {
   const [error, setError] = React.useState("");
 
   const admin = mounted ? isAdmin() : false;
+  const user = mounted ? getUser() : null;
 
   React.useEffect(() => {
     setMounted(true);
@@ -64,19 +96,35 @@ export default function LoginButton() {
 
   function login() {
     setError("");
+
     if (username === "admin" && password === "admin") {
       setAdmin(true);
+      setUser("admin");
       setOpen(false);
-      setMenuOpen(true);
+      setMenuOpen(false);
       setUsername("");
       setPassword("");
       return;
     }
-    setError("Credenziali non valide (usa admin / admin)");
+
+    const u = username.trim().toLowerCase();
+    const p = password;
+    if (USERS[u] && USERS[u] === p) {
+      setUser(u);
+      setAdmin(false);
+      setOpen(false);
+      setMenuOpen(false);
+      setUsername("");
+      setPassword("");
+      return;
+    }
+
+    setError("Credenziali non valide (usa admin/admin oppure marco/marco, andrea/andrea, gabriele/gabriele)");
   }
 
   function logout() {
     setAdmin(false);
+    setUser(null);
     setMenuOpen(false);
     setOpen(false);
   }
@@ -102,27 +150,35 @@ export default function LoginButton() {
     <div className="relative" data-kmzero-login-root>
       <button
         type="button"
-        onClick={() => (admin ? setMenuOpen((v) => !v) : openLogin())}
+        onClick={() => {
+          if (admin) return setMenuOpen((v) => !v);
+          if (user) return setMenuOpen((v) => !v);
+          return openLogin();
+        }}
         className="rounded-full border px-4 py-2 text-sm font-semibold"
         style={{ borderColor: "var(--line)", background: "transparent", color: "var(--ink)" }}
       >
-        {admin ? "Admin" : "Login"}
+        {admin ? "Admin" : user ? user : "Login"}
       </button>
 
-      {admin && menuOpen ? (
+      {menuOpen && (admin || user) ? (
         <div
           className="absolute right-0 top-[calc(100%+10px)] w-56 overflow-hidden rounded-2xl border shadow-lg"
-          style={{ borderColor: "var(--line)", background: "var(--surface)" }}
+          style={{ borderColor: "var(--line)", background: "var(--bg)" }}
         >
-          <Link
-            href="/admin"
-            className="block px-4 py-3 text-sm font-semibold hover:opacity-80"
-            style={{ color: "var(--ink)" }}
-            onClick={() => setMenuOpen(false)}
-          >
-            Pannello di controllo
-          </Link>
-          <div className="h-px" style={{ background: "var(--line)" }} />
+          {admin ? (
+            <>
+              <Link
+                href="/admin"
+                className="block px-4 py-3 text-sm font-semibold hover:opacity-80"
+                style={{ color: "var(--ink)" }}
+                onClick={() => setMenuOpen(false)}
+              >
+                Pannello di controllo
+              </Link>
+              <div className="h-px" style={{ background: "var(--line)" }} />
+            </>
+          ) : null}
           <button
             type="button"
             onClick={logout}

@@ -192,7 +192,8 @@ export default function Home() {
                 boxShadow: "var(--shadow2)",
               }}
             >
-              <img src="/about/about.png" alt="Chi siamo" className="mx-auto block w-full max-w-[520px] h-auto max-h-[360px] md:max-h-[420px] object-contain" />
+              <img src="/about/about.png" alt="Chi siamo" className="kmz-about-img-dark w-full rounded-3xl object-cover" />
+              <img src="/about/about-light.png" alt="Chi siamo" className="kmz-about-img-light w-full rounded-3xl object-cover" />
             </div>
           </div>
         </div>
@@ -257,7 +258,7 @@ export default function Home() {
               <div className="p-5">
                 <div className="text-sm font-semibold">{p.name}</div>
                 <div className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-                  {p.distanceKm} km • {p.categories?.[0] ?? "Prodotti"}
+                  {p.tags?.[0] ? `${p.tags[0]} • ` : ""}{p.distanceKm} km • {p.categories?.[0] ?? "Prodotti"}
                 </div>
                 <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--accent2)" }}>
                   Visita profilo <span aria-hidden>→</span>
